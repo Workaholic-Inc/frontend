@@ -77,7 +77,7 @@ export class EndPoints {
   // Authentication
   async userLogin(data) {
     // Default options are marked with *
-    return await fetch("http://localhost:9000/auth/signin", {
+    return await fetch(`${backendURL}/auth/signin`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
@@ -94,7 +94,7 @@ export class EndPoints {
 
   async userSignUp(data) {
     // Default options are marked with *
-    const response = await fetch("http://localhost:9000/auth/signup", {
+    const response = await fetch(`${backendURL}/auth/signup`, {
       method: "POST",
       mode: "cors",
       cache: "no-cache",
