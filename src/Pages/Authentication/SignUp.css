@@ -1,0 +1,94 @@
+.fruad {
+  display: flex;
+  width: 100%;
+}
+
+.img-s {
+  width: 50%;
+  height: 100vh;
+}
+.box-1 {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.fruad img {
+  width: 100%;
+  height: 100%;
+}
+
+.kala {
+  height: 50%;
+  width: 404px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input1 {
+  width: 100%;
+  border-radius: 5px;
+  margin: 10px 0;
+  height: 30px;
+}
+
+.kala h1 {
+  margin: 0;
+  margin-bottom: 62px;
+}
+
+label {
+  margin: 10px 0;
+}
+
+button {
+  height: 30px;
+  width: 30%;
+  margin: 0 auto;
+}
+
+h3 {
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+span {
+  text-decoration: none;
+  color: black;
+  border: 2px solid green;
+  padding: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .fruad {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    height: 100vh;
+  }
+  .box-1 {
+    width: 100%;
+    word-spacing: 1px;
+    height: 100vh;
+    padding: 0 5px;
+  }
+  .img-s {
+    width: 100%;
+    height: 50%;
+  }
+  h1 {
+    margin: 0;
+  }
+
+  .kala h1 {
+    margin: 0;
+  }
+
+  .kala {
+    height: 100%;
+  }
+}
