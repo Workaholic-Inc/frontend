@@ -1,8 +1,9 @@
 import React from "react";
+import "./Button.css";
 
 const ButtonC = (props) => {
   return (
-    <div>
+    <div className="btn">
       <button onClick={props.handleSubmit}>{props.label}</button>
     </div>
   );

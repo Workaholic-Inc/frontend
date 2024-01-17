@@ -5,6 +5,8 @@ import Input from "../../Components/Input";
 import Checkbox from "../../Components/Checkbox";
 import { EndPoints } from "../../Utils/EndPoints";
 import { decodedToken, formatDate } from "../../Utils/HelperFunctions";
+import ButtonC from "../../Components/Button/Button";
+import { MdDelete } from "react-icons/md";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -54,12 +56,17 @@ const HomePage = () => {
   }
 
   async function handleKeyDown(event) {
-    if (event.key === "Enter") {
-      const gigi = await backend.createTodo({
-        title: newTodo,
-      });
-      setTodos(await gigi.json());
-      event.target.value = "";
+    if (newTodo === "") {
+      window.alert("please Enter Todo");
+    } else {
+      if (event.key === "Enter") {
+        const gigi = await backend.createTodo({
+          title: newTodo,
+        });
+        setTodos(await gigi.json());
+        event.target.value = "";
+        setNewTodo("");
+      }
     }
   }
 
@@ -67,11 +74,39 @@ const HomePage = () => {
     setNewTodo(event.target.value);
   };
 
+  async function handleSubmit(event) {
+    if (newTodo === "") {
+      window.alert("please Enter Todo");
+    } else {
+      const gigi = await backend.createTodo({
+        title: newTodo,
+      });
+      setTodos(await gigi.json());
+      setNewTodo("");
+      let dester = document.getElementsByClassName("hm-input");
+      dester[0].value = "";
+    }
+  }
+
   async function handleDelete(event) {
     const res = await backend.deleteTask({
       id: Number(event.target.id),
     });
     setTodos(await res.json());
+  }
+
+  async function handleFilter(event) {
+    let data = await backend.getAllTodos();
+    let response = await data.json();
+    let filter = event.target.value;
+    console.log(filter);
+    if (filter === "Completed") {
+      setTodos(response.filter((x) => x.is_completed));
+    } else if (filter === "Uncompleted") {
+      setTodos(response.filter((x) => !x.is_completed));
+    } else {
+      setTodos(response);
+    }
   }
 
   if (!authenticated) {
@@ -89,13 +124,27 @@ const HomePage = () => {
               <p>These are the tasks waiting for you...</p>
               <h1>TASK MANAGEMENT</h1>
             </div>
-            <Input
-              id="2"
-              class="hm-input"
-              placeholder="Create a new Todo"
-              handleInput={handleInput}
-              handleKeyDown={handleKeyDown}
-            />
+            <div className="actions">
+              <Input
+                id="2"
+                class="hm-input"
+                placeholder="Create a new Todo"
+                handleInput={handleInput}
+                handleKeyDown={handleKeyDown}
+              />
+              <ButtonC label="Create" handleSubmit={handleSubmit} />
+            </div>
+            <div className="todo-filter">
+              <select name="Filter" id="todo-filter" onChange={handleFilter}>
+                <option value="">Filter Todos</option>
+                <option className="select-op" value="Completed">
+                  Completed
+                </option>
+                <option className="select-op" value="Uncompleted">
+                  Uncompleted
+                </option>
+              </select>
+            </div>
             <div className="todo-list">
               {todos.map((todo) => (
                 <div className="chb-div">
@@ -107,9 +156,11 @@ const HomePage = () => {
                     checked={todo.is_completed}
                     dateLabel={formatDate(todo.created_at)}
                   />
-                  <div className="del-btn" id={todo.id} onClick={handleDelete}>
-                    🚮
-                  </div>
+                  <MdDelete
+                    className="del-btn"
+                    id={todo.id}
+                    onClick={handleDelete}
+                  />
                 </div>
               ))}
             </div>

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "./SignUp.css";
 import Input from "../../Components/Input";
-import Button from "../../Components/Button";
+import Button from "../../Components/Button/Button";
 import { setToken } from "../../Utils/HelperFunctions";
 import { EndPoints } from "../../Utils/EndPoints";
+import Alert from "../../Components/Alert/Alert";
 
 const SignIn = () => {
   const backend = new EndPoints();
@@ -35,6 +36,10 @@ const SignIn = () => {
     }
   };
 
+  useEffect(() => {
+    <Alert />;
+  }, [authenticated]);
+
   return (
     <div className="fruad">
       <div className="box-1">
@@ -46,6 +51,7 @@ const SignIn = () => {
             type="email"
             name="email"
             placeholder="Enter your Email"
+            required
             value={val.email}
             handleInput={handleInput}
           />
@@ -54,6 +60,7 @@ const SignIn = () => {
             label="Password"
             type="password"
             name="password"
+            required
             placeholder="Enter password"
             value={val.password}
             handleInput={handleInput}

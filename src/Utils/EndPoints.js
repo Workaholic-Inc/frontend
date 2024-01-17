@@ -30,12 +30,12 @@ export class EndPoints {
       credentials: "same-origin",
       headers: {
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
+        // "Content-Type": "application/x-www-form-urlencoded",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       redirect: "follow",
       referrerPolicy: "no-referrer",
-      //   body: JSON.stringify(data),
+      // body: JSON.stringify(data),
     });
   }
 

@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 
-// export const REACT_APP_BACKEND_URL = () => "http://localhost:9000";
-export const REACT_APP_BACKEND_URL = () => "https://workaholic.onrender.com";
+export const REACT_APP_BACKEND_URL = () => "http://localhost:9000";
+// export const REACT_APP_BACKEND_URL = () => "https://workaholic.onrender.com";
 
 export function formatDate(inputDate) {
   const date = new Date(inputDate);

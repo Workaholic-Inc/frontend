@@ -14,6 +14,8 @@ const Input = (props) => {
           onChange={props.handleInput}
           onKeyDown={props.handleKeyDown}
           id={props.id}
+          required={props.required}
+          minLength={"3"}
         />
         {props.label2}
       </label>

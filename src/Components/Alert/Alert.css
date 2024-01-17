@@ -1,0 +1,14 @@
+.md-div {
+  height: 100vh;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-1 {
+  background-color: aqua;
+  width: 400px;
+  height: 200px;
+  margin: 0 auto;
+}

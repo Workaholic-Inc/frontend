@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./SignUp.css";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../Components/Input";
-import ButtonC from "../../Components/Button";
+import ButtonC from "../../Components/Button/Button";
 import { EndPoints } from "../../Utils/EndPoints";
 
 const SignUp = () => {
