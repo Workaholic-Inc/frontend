@@ -15,6 +15,8 @@ const HomePage = () => {
   );
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [filterTodo, setFilterTodo] = useState("all");
+
   const backend = new EndPoints();
   const verifyToken = decodedToken();
 
@@ -52,14 +54,18 @@ const HomePage = () => {
     e.target.checked = true;
     const giga = await backend.completeTask(datapase);
     let response = await giga.json();
-    setTodos(response);
+    if (response.status === 401) {
+      // setTodos([]);
+      navigate("/signin");
+    } else {
+      setTodos(response);
+    }
   }
 
   async function handleKeyDown(event) {
-    if (newTodo === "") {
-      window.alert("please Enter Todo");
-    } else {
-      if (event.key === "Enter") {
+    if (event.key === "Enter") {
+      newTodo === "" ? window.alert("please Enter Todo") : createTodo();
+      async function createTodo() {
         const gigi = await backend.createTodo({
           title: newTodo,
         });
@@ -89,20 +95,22 @@ const HomePage = () => {
   }
 
   async function handleDelete(event) {
-    const res = await backend.deleteTask({
+    const obj = {
       id: Number(event.target.id),
-    });
+    };
+    console.log(event.target);
+    const res = await backend.deleteTask(obj);
     setTodos(await res.json());
   }
 
   async function handleFilter(event) {
+    // setFilterTodo(event.target.value);
+    let x = event.target.value;
     let data = await backend.getAllTodos();
     let response = await data.json();
-    let filter = event.target.value;
-    console.log(filter);
-    if (filter === "Completed") {
+    if (x === "Completed") {
       setTodos(response.filter((x) => x.is_completed));
-    } else if (filter === "Uncompleted") {
+    } else if (x === "Uncompleted") {
       setTodos(response.filter((x) => !x.is_completed));
     } else {
       setTodos(response);
@@ -132,7 +140,9 @@ const HomePage = () => {
                 handleInput={handleInput}
                 handleKeyDown={handleKeyDown}
               />
-              <ButtonC label="Create" handleSubmit={handleSubmit} />
+              <div className="cte-btn">
+                <ButtonC label="Create" handleSubmit={handleSubmit} class="ctn-btnn" />
+              </div>
             </div>
             <div className="todo-filter">
               <select name="Filter" id="todo-filter" onChange={handleFilter}>
@@ -156,11 +166,14 @@ const HomePage = () => {
                     checked={todo.is_completed}
                     dateLabel={formatDate(todo.created_at)}
                   />
-                  <MdDelete
-                    className="del-btn"
-                    id={todo.id}
-                    onClick={handleDelete}
-                  />
+                  <div onClick={handleDelete}>
+                    <span
+                      class="material-symbols-outlined del-btn"
+                      id={todo.id}
+                    >
+                      delete
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

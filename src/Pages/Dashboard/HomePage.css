@@ -60,11 +60,8 @@
 
 .del-btn {
   margin: 0;
-  width: 20px;
+  border: 0;
   padding: 0;
-  cursor: pointer;
-  color: red;
-  font-size: 60px;
 }
 
 @media screen and (max-width: 600px) {
@@ -82,8 +79,8 @@
     width: 375px;
   }
 
-  .btn {
-    margin-bottom: 9px;
+  .ctn-btnn {
+    margin-bottom: 10px;
   }
   .home-back img {
     width: 100%;
