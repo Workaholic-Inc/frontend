@@ -16,21 +16,18 @@ pipeline {
             }
         }
 
-    //     stage('Build') {
-    //         steps {
-    //             sh 'npm run build'
-    //         }
-    // }
-
-    //     stage('Test') {
-    //         steps {
-    //             sh 'npm run test'
-    //         }
-    // }
-        stage('Test') {
-            steps {
-                sh 'pwd'
-            }
+    stage('Test') {
+        steps {
+            sh 'pwd'
+        }
     }
-}
+
+    stage('SonarQube Analysis') {
+    def scannerHome = tool 'sonar-server';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+          }
+    }
+
+  }
 }

@@ -6,7 +6,6 @@ import Checkbox from "../../Components/Checkbox";
 import { EndPoints } from "../../Utils/EndPoints";
 import { decodedToken, formatDate } from "../../Utils/HelperFunctions";
 import ButtonC from "../../Components/Button/Button";
-import { MdDelete } from "react-icons/md";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -15,7 +14,6 @@ const HomePage = () => {
   );
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
-  const [filterTodo, setFilterTodo] = useState("all");
 
   const backend = new EndPoints();
   const verifyToken = decodedToken();
@@ -55,7 +53,6 @@ const HomePage = () => {
     const giga = await backend.completeTask(datapase);
     let response = await giga.json();
     if (response.status === 401) {
-      // setTodos([]);
       navigate("/signin");
     } else {
       setTodos(response);
@@ -141,7 +138,11 @@ const HomePage = () => {
                 handleKeyDown={handleKeyDown}
               />
               <div className="cte-btn">
-                <ButtonC label="Create" handleSubmit={handleSubmit} class="ctn-btnn" />
+                <ButtonC
+                  label="Create"
+                  handleSubmit={handleSubmit}
+                  class="ctn-btnn"
+                />
               </div>
             </div>
             <div className="todo-filter">
