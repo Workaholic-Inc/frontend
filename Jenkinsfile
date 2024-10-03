@@ -27,5 +27,10 @@ pipeline {
     //             sh 'npm run test'
     //         }
     // }
+        stage('Test') {
+            steps {
+                sh 'pwd'
+            }
+    }
 }
 }
