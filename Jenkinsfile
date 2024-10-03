@@ -7,13 +7,6 @@ pipeline {
   }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                echo 'Pull code'
-                git branch: 'main', url: 'https://github.com/Workaholic-Inc/frontend.git'
-            }
-        }
-        
         stage('Install Packages') {
             steps {
                 echo 'Install Dependencies'
