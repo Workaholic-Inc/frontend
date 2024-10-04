@@ -5,6 +5,9 @@ pipeline {
     triggers {
         pollSCM '* * * * *'
     }
+    environment {
+      scannerHome = tool 'sonarqube_server'
+    }
     stages {
         stage('Install Packages') {
       steps {
@@ -22,7 +25,6 @@ pipeline {
 
     stage('SonarQube Analysis') {
       steps {
-        def scannerHome = tool 'sonarqube_server'
         withSonarQubeEnv('sonarqube_server') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
