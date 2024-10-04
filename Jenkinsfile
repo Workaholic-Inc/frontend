@@ -6,7 +6,7 @@ pipeline {
         pollSCM '* * * * *'
     }
     environment {
-      scannerHome = tool name: 'SonarQube Scanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+      scannerHome = tool name: 'sonarscanner'
     }
     stages {
         stage('Install Packages') {
