@@ -6,7 +6,7 @@ pipeline {
         pollSCM '* * * * *'
     }
     environment {
-      scannerHome = tool 'sonarqube_server'
+      scannerHome = tool 'SonarQube Scanner'
     }
     stages {
         stage('Install Packages') {
