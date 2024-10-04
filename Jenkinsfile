@@ -18,8 +18,7 @@ pipeline {
 
         stage('Test') {
       steps {
-        sh 'echo %cd%'
-        sh 'dir /a'
+        sh 'ls -a'
       }
         }
 
