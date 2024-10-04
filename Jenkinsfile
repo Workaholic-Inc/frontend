@@ -2,9 +2,6 @@ pipeline {
     agent {
         label 'win-agent'
     }
-    environment {
-        scannerHome = tool 'sonar-server'
-    }
     triggers {
         pollSCM '* * * * *'
     }
@@ -24,11 +21,9 @@ pipeline {
         }
 
     stage('SonarQube Analysis') {
-      steps {
-            sh '''$scannerHome/bin/sonar-scanner
-      -Dsonar.projectKey=workaholic_frontend \
-      -Dsonar.sources=. \
-      '''
+      def scannerHome = tool 'sonarqube_server'
+      withSonarQubeEnv() {
+        sh "${scannerHome}/bin/sonar-scanner"
       }
     }
     }
